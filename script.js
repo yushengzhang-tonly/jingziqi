@@ -53,6 +53,8 @@
   }
 
   function updateAfterMove() {
+    // 先渲染当前落子，避免胜利时最后一步尚未显示
+    renderBoard();
     const winnerLine = getWinnerLine();
     if (winnerLine) {
       gameOver = true;
@@ -74,7 +76,6 @@
     }
     current = current === 'X' ? 'O' : 'X';
     statusEl.textContent = `轮到 ${current}`;
-    renderBoard();
   }
 
   function disableRemaining() {
