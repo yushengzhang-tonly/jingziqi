@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>井字棋 - 离线版</title>
+  <meta name="description" content="井字棋小游戏，支持双人或人机 (AI 难度可选)。纯静态，无需服务器。" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <h1>井字棋</h1>
+    <div class="toolbar">
+      <button id="themeToggle" aria-label="切换主题">🌗</button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="panel settings">
+      <h2>设置</h2>
+      <div class="field-group">
+        <label for="modeSelect">模式：</label>
+        <select id="modeSelect">
+          <option value="pvp">玩家 vs 玩家</option>
+          <option value="pve">玩家 vs AI</option>
+        </select>
+      </div>
+      <div class="field-group" id="difficultyWrap">
+        <label for="difficultySelect">AI 难度：</label>
+        <select id="difficultySelect">
+          <option value="easy">简单</option>
+          <option value="medium" selected>中级</option>
+          <option value="hard">困难</option>
+        </select>
+      </div>
+      <div class="field-group">
+        <label for="firstPlayerSelect">先手：</label>
+        <select id="firstPlayerSelect">
+          <option value="X" selected>X</option>
+          <option value="O">O</option>
+        </select>
+      </div>
+      <button id="restartBtn" class="primary">重新开始</button>
+    </section>
+
+    <section class="panel board-panel">
+      <h2>棋盘</h2>
+      <div id="status" role="status" aria-live="polite" class="status">加载中...</div>
+      <div id="board" class="board" aria-label="井字棋棋盘" role="grid">
+        <!-- 单元格由脚本动态注入 -->
+      </div>
+    </section>
+
+    <section class="panel scoreboard">
+      <h2>比分</h2>
+      <ul class="scores">
+        <li>X 胜：<span id="scoreX">0</span></li>
+        <li>O 胜：<span id="scoreO">0</span></li>
+        <li>平局：<span id="scoreDraw">0</span></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <small>纯静态实现，仅供学习与娱乐。&copy; 2025</small>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
