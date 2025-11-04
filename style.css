@@ -11,6 +11,8 @@
   --draw: #64748b;
   --radius: 10px;
   --shadow: 0 4px 16px rgba(0,0,0,0.08);
+  /* 单元格尺寸变量（当前不直接用于布局，可保留以便后续扩展） */
+  --cell-size: clamp(70px, 22vw, 120px);
   font-size: 16px;
 }
 
@@ -100,16 +102,19 @@ button:active { transform: translateY(1px); }
   grid-template-columns: repeat(3, 1fr);
   gap: .5rem;
   width: 100%;
+  max-width: 360px; /* 限制最大宽度防止过宽 */
+  margin: 0 auto; /* 居中显示 */
 }
 
 .cell {
   position: relative;
   width: 100%;
-  padding-top: 100%; /* square */
+  aspect-ratio: 1 / 1; /* 保持正方形 */
   background: var(--bg);
   border: 2px solid var(--border);
   border-radius: 12px;
-  font-size: clamp(2.5rem, 8vw, 4.5rem);
+  font-size: clamp(2.2rem, 12vw, 3.8rem); /* 更保守的字体大小避免溢出 */
+  line-height: 1;
   font-weight: 600;
   display: flex;
   align-items: center;
@@ -118,6 +123,7 @@ button:active { transform: translateY(1px); }
   cursor: pointer;
   transition: background .25s, color .25s, border-color .25s, box-shadow .25s;
   user-select: none;
+  overflow: hidden;
 }
 .cell:hover { background: rgba(0,0,0,.05); }
 .dark .cell:hover { background: rgba(255,255,255,.08); }
@@ -138,7 +144,11 @@ button:active { transform: translateY(1px); }
 .scores li { font-size: .9rem; }
 
 @media (min-width: 800px) {
-  .board { gap: .75rem; }
+  .board { gap: .75rem; max-width: 420px; }
+}
+@media (max-width: 420px) {
+  .board { max-width: 300px; }
+  .cell { font-size: clamp(2rem, 18vw, 3.2rem); }
 }
 
 /* 深色模式滚动条微调 */
